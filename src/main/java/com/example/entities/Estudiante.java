@@ -39,7 +39,6 @@ public class Estudiante implements Serializable {
     private int id;
     private String nombre;
     private String apellidos;
-    sdfghjklkiuytr
 
     // Como quiero que guarde los campos de tipo enum: llamar en String
     @Enumerated(EnumType.STRING)
