@@ -33,7 +33,8 @@ public class CorreoServiceImpl implements CorreoService {
     @Override
     public void persistirCorreo(int idEstudiante, Correo correo) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'persistirCorreo'");
-    }
+        correo.setEstudiante(estudianteDao.findById(idEstudiante).get());
+        correoDao.save(correo);
+    }   
 
 }
