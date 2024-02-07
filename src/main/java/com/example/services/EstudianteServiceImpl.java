@@ -42,7 +42,7 @@ public class EstudianteServiceImpl implements EstudianteService {
     @Override
     public void actualizarEstudiante(Estudiante estudiante) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarEstudiante'");
+        estudianteDao.save(estudiante);
     }
 
 }
