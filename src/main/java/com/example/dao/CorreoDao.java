@@ -9,10 +9,9 @@ import com.example.entities.Correo;
 import com.example.entities.Estudiante;
 
 @Repository
-
 public interface CorreoDao extends JpaRepository<Correo, Integer>{
 
-    List<Correo> findbyEstudiante(Estudiante estudiante);
+    List<Correo> findByEstudiante(Estudiante estudiante);
     void deleteByEstudiante(Estudiante estudiante);
     
 

@@ -28,7 +28,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 // Serializable convertir de objeto a un flujo
 public class Estudiante implements Serializable {
 
@@ -37,6 +36,7 @@ public class Estudiante implements Serializable {
     @Id // es la primaryKey
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Hago que el ID sea autoincremental
     private int id;
+
     private String nombre;
     private String apellidos;
 
@@ -47,7 +47,7 @@ public class Estudiante implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd") // campos de tipo LocalDate
     private LocalDate fechaMatricula;
     
-    private double asignaturasMatriculadas;
+    private int asignaturasMatriculadas;
     private String foto;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "estudiante")
@@ -57,9 +57,6 @@ public class Estudiante implements Serializable {
     private List<Telefono> telefonos;
 
     // estudiante tiene un curso. Relacion Estudiante-Curso
-    // cascade: como quiero que el cambio se propague
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     private Curso curso;
-
-
 }

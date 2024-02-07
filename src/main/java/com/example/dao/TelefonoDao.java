@@ -9,7 +9,6 @@ import com.example.entities.Estudiante;
 import com.example.entities.Telefono;
 
 @Repository
-
 public interface TelefonoDao extends JpaRepository<Telefono, Integer>{
    
     // Creo este método para buscar telefono por id del estudiante

@@ -21,13 +21,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class Telefono implements Serializable {
     private static final long serialVersionUID = 1L; // el serializado
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
     private String telefono;
 
