@@ -18,7 +18,6 @@ public class CorreoServiceImpl implements CorreoService {
     private final CorreoDao correoDao;
     private final EstudianteDao estudianteDao;
 
-
     @Override
     public List<Correo> dameCorreos(int idEstudiante) {
         // TODO Auto-generated method stub
@@ -28,7 +27,7 @@ public class CorreoServiceImpl implements CorreoService {
     @Override
     public void eliminaCorreos(int idEstudiante) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminaCorreos'");
+        correoDao.deleteByEstudiante(estudianteDao.findById(idEstudiante).get());
     }
 
     @Override
