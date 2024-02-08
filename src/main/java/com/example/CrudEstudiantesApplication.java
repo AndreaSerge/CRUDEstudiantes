@@ -108,6 +108,25 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 		telefonoService.persistirTelefono(1, telefono2Est1);
 		telefonoService.persistirTelefono(1, telefono3Est1);
 
+		Telefono telefono1Est2= Telefono.builder()
+				.telefono("675458")
+				.estudiante(estudianteService.dameUnEstudiante(2))
+				.build();
+
+		telefonoService.persistirTelefono(2, telefono1Est2);
+
+		Telefono telefono1Est3= Telefono.builder()
+				.telefono("999999958")
+				.estudiante(estudianteService.dameUnEstudiante(3))
+				.build();
+		
+		Telefono telefono2Est3= Telefono.builder()
+				.telefono("22222229958")
+				.estudiante(estudianteService.dameUnEstudiante(3))
+				.build();
+
+		telefonoService.persistirTelefono(3, telefono1Est3);
+		telefonoService.persistirTelefono(3, telefono2Est3);
 
 	}
 
