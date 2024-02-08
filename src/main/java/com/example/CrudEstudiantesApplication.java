@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.entities.Correo;
 import com.example.entities.Curso;
 import com.example.entities.Estudiante;
 import com.example.entities.Genero;
@@ -35,7 +36,7 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		// Primero: creamos los cursos
+		// Add cursos
 		Curso curso1 = Curso.builder()
 				.descripcion("Matemáticas")
 				.horario(Horario.DIURNO)
@@ -55,6 +56,7 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 		cursoService.persistirCurso(curso2);
 		cursoService.persistirCurso(curso3);
 
+		// Add estudiantes
 		Estudiante est1 = Estudiante.builder()
 				.nombre("E1")
 				.apellidos("AE1")
@@ -63,7 +65,6 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 				.asignaturasMatriculadas(2)
 				.foto(null)
 				.build();
-
 
 		Estudiante est2 = Estudiante.builder()
 				.nombre("E2")
@@ -88,7 +89,7 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 		estudianteService.persistirEstudiante(est3);
 
 
-		//telefonos
+		// Add telefonos
 		Telefono telefono1Est1= Telefono.builder()
 				.telefono("675458")
 				.estudiante(estudianteService.dameUnEstudiante(1))
@@ -127,6 +128,25 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 
 		telefonoService.persistirTelefono(3, telefono1Est3);
 		telefonoService.persistirTelefono(3, telefono2Est3);
+
+		
+		// Add correos
+		Correo correo1Est1 = Correo.builder()
+				.correo("andrea@serge.com")
+				.build();
+
+		correoService.persistirCorreo(1, correo1Est1);
+
+		Correo correo1Est2 = Correo.builder()
+				.correo("jjjjj@serge.com")
+				.build();
+
+		Correo correo2Est2 = Correo.builder()
+				.correo("ggggg@serge.com")
+				.build();
+		
+		correoService.persistirCorreo(2, correo1Est2);
+		correoService.persistirCorreo(2, correo2Est2);
 
 	}
 
