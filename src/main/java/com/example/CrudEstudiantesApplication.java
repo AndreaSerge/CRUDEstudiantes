@@ -64,6 +64,7 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 				.fechaMatricula(LocalDate.of(2000, Month.JANUARY, 12))
 				.asignaturasMatriculadas(2)
 				.foto(null)
+				.curso(cursoService.dameUnCurso(1))
 				.build();
 
 		Estudiante est2 = Estudiante.builder()
@@ -73,6 +74,7 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 				.fechaMatricula(LocalDate.of(2000, Month.APRIL, 12))
 				.asignaturasMatriculadas(4)
 				.foto(null)
+				.curso(cursoService.dameUnCurso(2))
 				.build();
 
 		Estudiante est3 = Estudiante.builder()
@@ -82,6 +84,7 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 				.fechaMatricula(LocalDate.of(1900, Month.MARCH, 12))
 				.asignaturasMatriculadas(2)
 				.foto(null)
+				.curso(cursoService.dameUnCurso(3))
 				.build();
 
 		estudianteService.persistirEstudiante(est1);
