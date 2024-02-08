@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.entities.Correo;
 import com.example.entities.Curso;
 import com.example.entities.Estudiante;
+import com.example.entities.Horario;
 import com.example.entities.Telefono;
 import com.example.services.CursoService;
 import com.example.services.EstudianteService;
@@ -166,5 +167,14 @@ public class MainController {
         return "redirect:/all";
     }
 
+    // listado del turno DIURNO
+    @GetMapping("/all-diurno/{idCurso}")
+    public String dameEstudiantesDiurno(Model model) {
+            
+    List<Estudiante> estudiantesDiurno = cursoService.dameEstudiantesPorHorario(Horario.DIURNO);
+    model.addAttribute("estudiantes", estudiantesDiurno);
+    return "views/listadoEstudiantes";
+
+}
 
 }

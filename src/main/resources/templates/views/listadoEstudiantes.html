@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Estudiantes</title>
     <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 </head>
 <body>
@@ -12,7 +12,7 @@
 
     <table>
         <thead>
-            <tr th:each="estudiante : ${estudiantes}">
+            <tr>
                 <th>Foto</th>
                 <th>Nombre</th>
                 <th>Apellidos</th>
@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="estudiante : ${estudiates}">
+            <tr th:each=" estudiante : ${estudiantes}">
                 <td th:text="${estudiante.foto}"></td>
                 <td th:text="${estudiante.nombre}"></td>
                 <td th:text="${estudiante.apellidos}"></td>
@@ -33,9 +33,9 @@
                 <td th:text="${estudiante.telefonos}"></td>
                 <td th:text="${estudiante.correos}"></td>
                 <td>
-                    <a th:href="@{'/detalles/' + ${estudiante.id}}">Detalles</a>
-                    <a th:href="@{'/actualizar/' + ${estudiante.id}}">Actualizar</a>
-                    <a th:href="@{'/eliminar/' + ${estudiante.id}}">Eliminar</a>
+                    <a th:href="@{'/detalles/'+${estudiante.id}}">Detalles</a>
+                    <a th:href="@{'/actualizar/'+${estudiante.id}}">Actualizar</a>
+                    <a th:href="@{'/eliminar/'+${estudiante.id}}">Eliminar</a>
                 </td>   
             </tr>
         </tbody>
