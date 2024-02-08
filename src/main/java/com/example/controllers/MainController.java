@@ -155,5 +155,15 @@ public class MainController {
     }
 
 
+    // Eliminar un estudiante
+    @GetMapping("/eliminar/{id}") //ese {id} es un path variable
+    @Transactional
+    public String eliminarEstudiante(@PathVariable(name = "id", required = true)
+                                    int idEstudiante) {
+    // Recupera el empleado cuyo id se recibe como paramétro y eliminarlo
+    estudianteService.eliminarEstudiante(idEstudiante);
+        return "redirect:/all";
+    }
+
 
 }
