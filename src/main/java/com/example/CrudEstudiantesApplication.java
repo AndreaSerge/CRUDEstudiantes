@@ -58,8 +58,8 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 
 		// Add estudiantes
 		Estudiante est1 = Estudiante.builder()
-				.nombre("E1")
-				.apellidos("AE1")
+				.nombre("Estudiante1")
+				.apellidos("Apellido1")
 				.genero(Genero.HOMBRE)
 				.fechaMatricula(LocalDate.of(2000, Month.JANUARY, 12))
 				.asignaturasMatriculadas(2)
@@ -68,8 +68,8 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 				.build();
 
 		Estudiante est2 = Estudiante.builder()
-				.nombre("E2")
-				.apellidos("AE2")
+				.nombre("Estudiante2")
+				.apellidos("Apellido2")
 				.genero(Genero.MUJER)
 				.fechaMatricula(LocalDate.of(2000, Month.APRIL, 12))
 				.asignaturasMatriculadas(4)
@@ -78,8 +78,8 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 				.build();
 
 		Estudiante est3 = Estudiante.builder()
-				.nombre("E3")
-				.apellidos("AE3")
+				.nombre("Estudiante3")
+				.apellidos("Apellido3")
 				.genero(Genero.OTRO)
 				.fechaMatricula(LocalDate.of(1900, Month.MARCH, 12))
 				.asignaturasMatriculadas(2)
