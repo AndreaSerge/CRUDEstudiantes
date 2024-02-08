@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 </head>
 <body>
     <h1>Estudiantes de una Universidad Ficticia MVC JPA Thymeleaf</h1>
@@ -12,7 +12,7 @@
 
     <table>
         <thead>
-            <tr>
+            <tr th:each="estudiante : ${estudiantes}">
                 <th>Foto</th>
                 <th>Nombre</th>
                 <th>Apellidos</th>
@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each=" estudiante : ${estudiates}">
+            <tr th:each="estudiante : ${estudiates}">
                 <td th:text="${estudiante.foto}"></td>
                 <td th:text="${estudiante.nombre}"></td>
                 <td th:text="${estudiante.apellidos}"></td>
@@ -33,16 +33,16 @@
                 <td th:text="${estudiante.telefonos}"></td>
                 <td th:text="${estudiante.correos}"></td>
                 <td>
-                    <a th:href="@{/detalles/}+${estudiante.id}">Detalles</a>
-                    <a th:href="@{/actualizar/}+${estudiante.id}">Actualizar</a>
-                    <a th:href="@{/eliminar/}+${estudiante.id}">Eliminar</a>
+                    <a th:href="@{'/detalles/' + ${estudiante.id}}">Detalles</a>
+                    <a th:href="@{'/actualizar/' + ${estudiante.id}}">Actualizar</a>
+                    <a th:href="@{'/eliminar/' + ${estudiante.id}}">Eliminar</a>
                 </td>   
             </tr>
         </tbody>
     </table>
 
     <div>
-        <a th:href="@{/frmAltaModificacion}">Formulario de Alta de Empleado</a>
+        <a th:href="@{/frmAltaModificacion}">Formulario de Alta de Estudiante</a>
     </div>
 
 </body>
