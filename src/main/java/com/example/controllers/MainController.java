@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.services.CursoService;
@@ -30,11 +31,22 @@ public class MainController {
     // Lo espero también por GET, usando @GetMapping, que debe indicar como termina
     // URL: http//blablabla/all
 
-      @GetMapping("/all")
+    @GetMapping("/all")
     public String dameEstudiantes(Model model){
         model.addAttribute("estudiantes",
         estudianteService.dameTodosLosEstudiantes());
         return "views/listadoEstudiantes";
+    }
+
+    // Cuando se recibe un parametro conjuntamente con la request
+    // En la forma nueva, tengo un numero que guardaré en la URL
+    @GetMapping("/detalles/{id}")
+    public String detallesEstudiante(
+        @PathVariable(name= "id") int idEstudiante, Model model) {
+        LOG.info("ID Estudiante Recibido" + idEstudiante);
+        model.addAttribute("estudiante",
+            estudianteService.dameUnEstudiante(idEstudiante));
+        return "views/estudianteDetalles";
     }
 
 }
