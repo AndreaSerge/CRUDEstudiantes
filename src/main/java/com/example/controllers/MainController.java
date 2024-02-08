@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.entities.Estudiante;
 import com.example.services.CursoService;
 import com.example.services.EstudianteService;
 
@@ -48,5 +49,22 @@ public class MainController {
             estudianteService.dameUnEstudiante(idEstudiante));
         return "views/estudianteDetalles";
     }
+    
+    @GetMapping("/frmAltaModificacion")
+    public String formularioAltaModificacionEstudiante(Model model) {
+
+    //Le paso al modelo un obejto vacio
+    Estudiante estudiante = new Estudiante();
+
+    model.addAttribute("estudiante", estudiante);
+
+    //También para los cursos
+    model.addAttribute("cursos",
+        cursoService.dameLosCursos());
+    
+    return "views/frmAltaModificacionEstudiante";
+    }
+
+
 
 }
