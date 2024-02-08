@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="styleFormulario.css">
 </head>
 <body>
-    <h1>Formulario Alta/Modificación de Estudiante</h1>
+    <h1>Formulario Alta/Modificación de Estudiantes</h1>
 
     <fieldset>
         <legend>Formulario</legend>
