@@ -43,6 +43,7 @@ public class MainController {
     // Lo espero también por GET, usando @GetMapping, que debe indicar como termina
     // URL: http//blablabla/all
 
+    // Mostrar todos los estudiantes
     @GetMapping("/all")
     public String dameEstudiantes(Model model){
         model.addAttribute("estudiantes",
@@ -50,8 +51,7 @@ public class MainController {
         return "views/listadoEstudiantes";
     }
 
-    // Cuando se recibe un parametro conjuntamente con la request
-    // En la forma nueva, tengo un numero que guardaré en la URL
+    // Detalles del estudiante
     @GetMapping("/detalles/{id}")
     public String detallesEstudiante(
         @PathVariable(name= "id") int idEstudiante, Model model) {
@@ -61,6 +61,7 @@ public class MainController {
         return "views/estudianteDetalles";
     }
 
+    // Crear formulario alta y modificacion
     @GetMapping("/frmAltaModificacion")
     public String formularioAltaModificacionEstudiante(Model model) {
 
@@ -76,6 +77,7 @@ public class MainController {
     return "views/frmAltaModificacionEstudiante";
     }
 
+    // Guardar estudiante
     @PostMapping("/persistir")
     @Transactional // todas las que necesitan modificación en la base de datos, es el autocommit
     public String persistirEstudiante(@ModelAttribute(name="estudiante") Estudiante estudiante,
@@ -122,7 +124,7 @@ public class MainController {
        return "redirect:/all";
     }
 
-    // Este metodo va a retornar lo mismo que el método que persiste
+    // Actualizar estudiante. Devuelve lo mismo que el método que persiste
     @GetMapping("/actualizar/{id}") //ese {id} es un path variable
     @Transactional
     public String actualizarEstudiante(@PathVariable(name = "id", required = true) int idEstudiante,
@@ -153,7 +155,6 @@ public class MainController {
 
         return "views/frmAltaModificacionEmpleado";
     }
-
 
     // Eliminar un estudiante
     @GetMapping("/eliminar/{id}") //ese {id} es un path variable
