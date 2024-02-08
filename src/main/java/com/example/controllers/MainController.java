@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entities.Correo;
+import com.example.entities.Curso;
 import com.example.entities.Estudiante;
 import com.example.entities.Telefono;
 import com.example.services.CursoService;
@@ -118,6 +120,38 @@ public class MainController {
         estudianteService.persistirEstudiante(estudiante);
 
        return "redirect:/all";
+    }
+
+    // Este metodo va a retornar lo mismo que el método que persiste
+    @GetMapping("/actualizar/{id}") //ese {id} es un path variable
+    @Transactional
+    public String actualizarEstudiante(@PathVariable(name = "id", required = true) int idEstudiante,
+                                    Model model) {
+    // Recupera el empleado cuyo id se recibe como paramétro
+    Estudiante estudiante = estudianteService.dameUnEstudiante(idEstudiante);
+    model.addAttribute("estudiante", estudiante);
+
+    // Recupera los cursos
+    List<Curso> cursos = cursoService.dameLosCursos();
+    model.addAttribute("cursos", cursos);
+
+    // Construir los numeros de telefono, a partir de los telefonos recibidos conjuntamente con el empleado
+    if(estudiante.getTelefonos() != null) {
+    String numerosTelefono = estudiante.getTelefonos().stream()
+                                    .map(Telefono::getTelefono)
+                                    .collect(Collectors.joining(";"));
+    model.addAttribute("numerosTelefono", numerosTelefono);
+    }
+
+    // Construir los correos, a partir de los correos recibidos conjuntamente con el empleado
+    if(estudiante.getCorreos() != null) {
+        String direccionesDeCorreo = estudiante.getCorreos().stream()
+                                        .map(Correo::getCorreo)
+                                        .collect(Collectors.joining(";"));
+    model.addAttribute("direccionesDeCorreo", direccionesDeCorreo);
+    }
+
+        return "views/frmAltaModificacionEmpleado";
     }
 
 
