@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="styleFormulario.css">
+</head>
+<body>
+    <h1>Formulario Alta/Modificación de Estudiantes</h1>
+
+    <fieldset>
+        <legend>Formulario</legend>
+        <form th:object="${estudiante}" th:action="@{/persistir}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <label for="foto">Foto: </label>
+            <input type="text" id="foto" th:field="*{foto}">
+                        
+            <label for="nombre">Nombre: </label>
+            <input type="text" id="nombre" th:field="*{nombre}">
+            
+            <label for="apellido">Apellidos: </label>
+            <input type="text" id="apellido" th:field="*{apellido}">
+            
+            <label for="fechaMatricula">Fecha Matricula: </label>
+            <input type="date" id="fechaMatricula" th:field="*{fechaMatricula}">
+            
+            <fieldset>
+                <legend>Genero</legend>
+                <label for="hombre">Hombre</label>
+                <input type="radio" name="genero" id="hombre" value="HOMBRE" th:field="*{genero}">
+                
+                <label for="mujer">Mujer</label>
+                <input type="radio" name="genero" id="mujer" value="MUJER" th:field="*{genero}">
+
+                <label for="otro">Otro</label>
+                <input type="radio" name="genero" id="otro" value="OTRO" th:field="*{genero}">
+            </fieldset>
+
+            <label for="curso">Curso</label>
+            <select name="curso" id="curso">
+                <option></option>
+                <option th:each="curso: ${cursos}"
+                    th:value="${curso.id}"
+                        th:text="${curso.nombre}"
+                            th:selected="${estudiante.id != 0 and estudiante.curso.id == curso.id}"
+                        ></option>
+
+            </select>
+
+            <label for="telefonos">Telefonos</label>
+            <input type="text" id="telefonos" name="numerosTel"
+                placeholder="Uno o varios separados por ; "
+                    th:value="${numerosTelefono}">
+                
+            <label for="correos">Correos</label>
+            <input type="text" id="correos" name="direccionesCorreo"
+                th:value="${direccionesDeCorreo}"
+                placeholder="Uno o varios separados por ; ">
+            <input type="submit" value="Alta/Modificación">
+
+        </form>
+    </fieldset>
+    
+</body>
+</html>
