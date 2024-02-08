@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Estudiantes de una Universidad Ficticia MVC JPA Thymeleaf</h1>
+    <h3>Listado de Estudiantes</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Género</th>
+                <th>Fecha de Matrícula</th>
+                <th>Total de asignaturas</th>
+                <th>Teléfono</th>
+                <th>Correo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each=" estudiante : ${estudiates}">
+                <td th:text="${estudiante.foto}"></td>
+                <td th:text="${estudiante.nombre}"></td>
+                <td th:text="${estudiante.apellidos}"></td>
+                <td th:text="${estudiante.genero}"></td>
+                <td th:text="${estudiante.fechaMatricula}"></td>
+                <td th:text="${estudiante.telefonos}"></td>
+                <td th:text="${estudiante.correos}"></td>
+                <td>
+                    <a th:href="@{/detalles/}+${estudiante.id}">Detalles</a>
+                    <a th:href="@{/actualizar/}+${estudiante.id}">Actualizar</a>
+                    <a th:href="@{/eliminar/}+${estudiante.id}">Eliminar</a>
+                </td>   
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <a th:href="@{/frmAltaModificacion}">Formulario de Alta de Empleado</a>
+    </div>
+
+</body>
+</html>
