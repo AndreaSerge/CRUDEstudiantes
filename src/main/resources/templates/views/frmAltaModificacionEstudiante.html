@@ -13,19 +13,14 @@
         <legend>Formulario</legend>
         <form th:object="${estudiante}" th:action="@{/persistir}" method="post">
             <input type="hidden" th:field="*{id}">
-
             <label for="foto">Foto: </label>
             <input type="text" id="foto" th:field="*{foto}">
-                        
             <label for="nombre">Nombre: </label>
             <input type="text" id="nombre" th:field="*{nombre}">
-            
-            <label for="apellido">Apellidos: </label>
-            <input type="text" id="apellido" th:field="*{apellido}">
-            
+            <label for="apellidos">Apellidos: </label>
+            <input type="text" id="apellidos" th:field="*{apellidos}">
             <label for="fechaMatricula">Fecha Matricula: </label>
             <input type="date" id="fechaMatricula" th:field="*{fechaMatricula}">
-            
             <fieldset>
                 <legend>Genero</legend>
                 <label for="hombre">Hombre</label>
@@ -43,7 +38,7 @@
                 <option></option>
                 <option th:each="curso: ${cursos}"
                     th:value="${curso.id}"
-                        th:text="${curso.nombre}"
+                        th:text="${curso.descripcion}"
                             th:selected="${estudiante.id != 0 and estudiante.curso.id == curso.id}"
                         ></option>
 

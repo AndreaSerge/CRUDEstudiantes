@@ -68,7 +68,6 @@ public class MainController {
 
     //Le paso al modelo un obejto vacio
     Estudiante estudiante = new Estudiante();
-
     model.addAttribute("estudiante", estudiante);
 
     //También para los cursos
@@ -154,7 +153,7 @@ public class MainController {
     model.addAttribute("direccionesDeCorreo", direccionesDeCorreo);
     }
 
-        return "views/frmAltaModificacionEmpleado";
+        return "views/frmAltaModificacionEstudiante";
     }
 
     // Eliminar un estudiante
