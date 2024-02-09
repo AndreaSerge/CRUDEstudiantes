@@ -2,6 +2,8 @@ package com.example;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,10 +15,8 @@ import com.example.entities.Estudiante;
 import com.example.entities.Genero;
 import com.example.entities.Horario;
 import com.example.entities.Telefono;
-import com.example.services.CorreoService;
-import com.example.services.CursoService;
 import com.example.services.EstudianteService;
-import com.example.services.TelefonoService;
+
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,9 +25,6 @@ import lombok.RequiredArgsConstructor;
 public class CrudEstudiantesApplication implements CommandLineRunner {
 
 	private final EstudianteService estudianteService;
-	private final CursoService cursoService;
-	private final TelefonoService telefonoService;
-	private final CorreoService correoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CrudEstudiantesApplication.class, args);
@@ -52,10 +49,6 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 				.horario(Horario.DIURNO)
 				.build();
 
-		cursoService.persistirCurso(curso1);
-		cursoService.persistirCurso(curso2);
-		cursoService.persistirCurso(curso3);
-
 		// Add estudiantes
 		Estudiante est1 = Estudiante.builder()
 				.nombre("Estudiante1")
@@ -64,7 +57,7 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 				.fechaMatricula(LocalDate.of(2000, Month.JANUARY, 12))
 				.asignaturasMatriculadas(2)
 				.foto(null)
-				.curso(cursoService.dameUnCurso(1))
+				.curso(curso1)
 				.build();
 
 		Estudiante est2 = Estudiante.builder()
@@ -74,7 +67,7 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 				.fechaMatricula(LocalDate.of(2000, Month.APRIL, 12))
 				.asignaturasMatriculadas(4)
 				.foto(null)
-				.curso(cursoService.dameUnCurso(2))
+				.curso(curso2)
 				.build();
 
 		Estudiante est3 = Estudiante.builder()
@@ -84,72 +77,105 @@ public class CrudEstudiantesApplication implements CommandLineRunner {
 				.fechaMatricula(LocalDate.of(1900, Month.MARCH, 12))
 				.asignaturasMatriculadas(2)
 				.foto(null)
-				.curso(cursoService.dameUnCurso(3))
+				.curso(curso3)
 				.build();
 
-		estudianteService.persistirEstudiante(est1);
-		estudianteService.persistirEstudiante(est2);
-		estudianteService.persistirEstudiante(est3);
-
-
 		// Add telefonos
+		List<Telefono> telefonosEstudiante1 = new ArrayList<>(); 
+		
 		Telefono telefono1Est1= Telefono.builder()
 				.telefono("675458")
-				.estudiante(estudianteService.dameUnEstudiante(1))
+				.estudiante(est1)
 				.build();
 
 		Telefono telefono2Est1= Telefono.builder()
 				.telefono("5458")
-				.estudiante(estudianteService.dameUnEstudiante(1))
+				.estudiante(est1)
 				.build();
 
 		Telefono telefono3Est1= Telefono.builder()
 				.telefono("68888")
-				.estudiante(estudianteService.dameUnEstudiante(1))
+				.estudiante(est1)
 				.build();
 		
-		telefonoService.persistirTelefono(1, telefono1Est1);
-		telefonoService.persistirTelefono(1, telefono2Est1);
-		telefonoService.persistirTelefono(1, telefono3Est1);
+		telefonosEstudiante1.add(telefono1Est1);
+		telefonosEstudiante1.add(telefono2Est1);
+		telefonosEstudiante1.add(telefono3Est1);	
+		est1.setTelefonos(telefonosEstudiante1);
+
+		List<Telefono> telefonosEstudiante2 = new ArrayList<>(); 
 
 		Telefono telefono1Est2= Telefono.builder()
 				.telefono("675458")
-				.estudiante(estudianteService.dameUnEstudiante(2))
+				.estudiante(est2)
 				.build();
 
-		telefonoService.persistirTelefono(2, telefono1Est2);
+		telefonosEstudiante2.add(telefono1Est2);	
+		est2.setTelefonos(telefonosEstudiante2);
+
+		List<Telefono> telefonosEstudiante3 = new ArrayList<>(); 
 
 		Telefono telefono1Est3= Telefono.builder()
 				.telefono("999999958")
-				.estudiante(estudianteService.dameUnEstudiante(3))
+				.estudiante(est3)
 				.build();
 		
 		Telefono telefono2Est3= Telefono.builder()
 				.telefono("22222229958")
-				.estudiante(estudianteService.dameUnEstudiante(3))
+				.estudiante(est3)
 				.build();
 
-		telefonoService.persistirTelefono(3, telefono1Est3);
-		telefonoService.persistirTelefono(3, telefono2Est3);
-
+		telefonosEstudiante3.add(telefono1Est3);
+		telefonosEstudiante3.add(telefono2Est3);	
+		est3.setTelefonos(telefonosEstudiante3);
 		
 		// Add correos
+		
+		List<Correo> correosEstudiante1 = new ArrayList<>(); 
+
 		Correo correo1Est1 = Correo.builder()
 				.correo("andrea@serge.com")
+				.estudiante(est1)
 				.build();
 
-		correoService.persistirCorreo(1, correo1Est1);
+		correosEstudiante1.add(correo1Est1);	
+		est1.setCorreos(correosEstudiante1);
+
+		List<Correo> correosEstudiante2 = new ArrayList<>(); 
 
 		Correo correo1Est2 = Correo.builder()
 				.correo("jjjjj@serge.com")
+				.estudiante(est2)
 				.build();
 
 		Correo correo2Est2 = Correo.builder()
 				.correo("ggggg@serge.com")
+				.estudiante(est2)
 				.build();
 		
-		correoService.persistirCorreo(2, correo1Est2);
-		correoService.persistirCorreo(2, correo2Est2);
+		correosEstudiante2.add(correo1Est2);	
+		correosEstudiante2.add(correo2Est2);	
+		est2.setCorreos(correosEstudiante2);
+
+		List<Correo> correosEstudiante3 = new ArrayList<>(); 
+
+		Correo correo1Est3 = Correo.builder()
+				.correo("hhhhhhhhhj@serge.com")
+				.estudiante(est3)
+				.build();
+
+		Correo correo2Est3 = Correo.builder()
+				.correo("ddddddddd@serge.com")
+				.estudiante(est3)
+				.build();
+		
+		correosEstudiante3.add(correo1Est3);	
+		correosEstudiante3.add(correo2Est3);	
+		est3.setCorreos(correosEstudiante3);
+
+		estudianteService.persistirEstudiante(est1);
+		estudianteService.persistirEstudiante(est2);
+		estudianteService.persistirEstudiante(est3);
 
 	}
 

@@ -19,12 +19,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity // convierte la clase en una entidad de Hibernate
 @Table(name= "estudiantes") // anotación para crear una tabla
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -57,6 +59,6 @@ public class Estudiante implements Serializable {
     private List<Telefono> telefonos;
 
     // estudiante tiene un curso. Relacion Estudiante-Curso
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Curso curso;
 }
