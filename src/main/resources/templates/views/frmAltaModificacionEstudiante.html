@@ -11,10 +11,8 @@
 
     <fieldset>
         <legend>Formulario</legend>
-        <form th:object="${estudiante}" th:action="@{/persistir}" method="post">
+        <form th:object="${estudiante}" th:action="@{/persistir}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}">
-            <label for="foto">Foto: </label>
-            <input type="text" id="foto" th:field="*{foto}">
             <label for="nombre">Nombre: </label>
             <input type="text" id="nombre" th:field="*{nombre}">
             <label for="apellidos">Apellidos: </label>
@@ -31,6 +29,7 @@
 
                 <label for="otro">Otro</label>
                 <input type="radio" name="genero" id="otro" value="OTRO" th:field="*{genero}">
+
             </fieldset>
 
             <label for="curso">Curso</label>
@@ -44,6 +43,10 @@
 
             </select>
 
+            <label for="asignaturasMatriculadas">Asignaturas Matriculadas: </label>
+            <input type="text" id="asignaturasMatriculadas" th:field="*{asignaturasMatriculadas}">
+
+
             <label for="telefonos">Telefonos</label>
             <input type="text" id="telefonos" name="numerosTel"
                 placeholder="Uno o varios separados por ; "
@@ -53,6 +56,8 @@
             <input type="text" id="correos" name="direccionesCorreo"
                 th:value="${direccionesDeCorreo}"
                 placeholder="Uno o varios separados por ; ">
+
+            <input type="file" name="file" height="50px" width="50px">
             <input type="submit" value="Alta/Modificación">
 
         </form>

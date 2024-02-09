@@ -15,8 +15,5 @@ public interface CursoService {
   
       //Método que guarda un curso
       public void persistirCurso(Curso curso);
-
-      // Método que da estudiante por horario
-      public List<Estudiante> dameEstudiantesPorHorario(Horario horario);
   
 }

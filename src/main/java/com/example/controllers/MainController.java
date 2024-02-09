@@ -1,8 +1,11 @@
 package com.example.controllers;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entities.Correo;
 import com.example.entities.Curso;
@@ -81,8 +85,32 @@ public class MainController {
     @PostMapping("/persistir")
     @Transactional // todas las que necesitan modificación en la base de datos, es el autocommit
     public String persistirEstudiante(@ModelAttribute(name="estudiante") Estudiante estudiante,
+    
+    
     @RequestParam(name ="numerosTel", required = false) String telefonosRecibidos,
-    @RequestParam(name = "direccionesCorreo", required = false) String correosRecibidos) {
+    @RequestParam(name = "direccionesCorreo", required = false) String correosRecibidos,
+    @RequestParam(name = "file", required= false) MultipartFile imagen) {
+
+        // Recuperar la ruta (path) relativa de la carpeta donde quedará almacenado el archivo
+            Path imageFolder = Path.of("src/main/resources/static/images");
+            
+            // Crear la ruta absoluta
+            Path rutaAbsoluta = imageFolder.toAbsolutePath();
+
+            // También necesitamos la ruta completa (rutaAbsoluta + nombre del archivo recibido)
+            Path rutaCompleta = Path.of(rutaAbsoluta + "/" +imagen.getOriginalFilename());
+
+            try {
+
+                byte[] bytesImage =imagen.getBytes(); // Me devuelve el array de bytes que ha recibido del servidor
+                Files.write(rutaCompleta, bytesImage);
+
+                // Lo que resta es estblecer la propiedas foto del empleado a el nombre original del arciho recibido
+                estudiante.setFoto(imagen.getOriginalFilename());
+                           
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
 
         // Procesar los telefonos
         if(telefonosRecibidos != null) {
@@ -166,14 +194,30 @@ public class MainController {
         return "redirect:/all";
     }
 
-    // listado del turno DIURNO
-    @GetMapping("/all-diurno/{idCurso}")
-    public String dameEstudiantesDiurno(Model model) {
-            
-    List<Estudiante> estudiantesDiurno = cursoService.dameEstudiantesPorHorario(Horario.DIURNO);
-    model.addAttribute("estudiantes", estudiantesDiurno);
-    return "views/listadoEstudiantes";
+    // listado de los alumnos en jornada diurna
+    @GetMapping("/listadoDiurno")    
+    public String estudiantesDiurno(Model model){        
+    List<Estudiante> estudiantesDiurno = estudianteService.dameTodosLosEstudiantes().stream().
+        filter(v -> v.getCurso().getHorario() == Horario.DIURNO).toList();
 
+    model.addAttribute("estudiantesDiurno", estudiantesDiurno);
+
+    return "views/listadoDiurno";
 }
+
+    // listado de los alumnos en jornada diurna
+    @GetMapping("/listadoPorCurso")    
+    public String estudiantesPorCurso(Model model){  
+
+    Map<Curso, List<Estudiante>> estudiantesPorCurso = estudianteService.dameTodosLosEstudiantes().stream()
+        .collect(Collectors.groupingBy(Estudiante::getCurso));
+
+    model.addAttribute("estudiantesPorCurso", estudiantesPorCurso);
+    return "views/listadoPorCurso";
+}
+
+
+
+
 
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Estudiantes por Curso</title>
+</head>
+<body>
+    <h1>Estudiantes por Curso</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Curso</th>
+                <th>Estudiantes</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr th:each="entry : ${estudiantesPorCurso}">
+                <!-- entry = clave.valor -->
+                <td th:text="${entry.key.descripcion}"></td>
+                <td>
+                    <ul>
+                        
+                        <li th:each="estudiante : ${entry.value}">
+                            
+                            <span th:text="${estudiante.nombre}"></span>
+                            <span th:text="${estudiante.apellidos}"></span>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
